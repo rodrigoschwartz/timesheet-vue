@@ -19,4 +19,14 @@ export default [
     name: 'Hours',
     view: 'Hours'
   },
+  {
+    path: '/value',
+    name: 'Value',
+    view: 'Value'
+  },
+  {
+    path: '/dashboards',
+    name: 'Dashboards',
+    view: 'Dashboards'
+  }
 ]

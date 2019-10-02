@@ -37,8 +37,9 @@ export default {
         //  { sortable: true, text: "Id", value: "id" },
         { sortable: true, text: "Demand Code", value: "demandCode" },
         { sortable: false, text: "Description", value: "description" },
+        { sortable: false, text: "Status", value: "status" },
         { sortable: false, text: "Value", value: "value", align: "right" },
-        { sortable: false, text: "Hours", value: "hours", align: "right" }
+        { sortable: false, text: "Hours", value: "hoursAp", align: "right" }
         //  { sortable: false, text: "Action", value: "action" }
       ]
     };

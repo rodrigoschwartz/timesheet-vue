@@ -17,7 +17,7 @@
 
     <v-list-item two-line>
       <v-list-item-avatar color="white">
-        <v-img src="/timesheet-vue/src/assets/tsm.png" height="34" contain />
+        <v-img src="" height="34" contain />
       </v-list-item-avatar>
 
       <v-list-item-title class="title">TimeSheet</v-list-item-title>
