@@ -4,23 +4,19 @@
     v-model="inputValue"
     :src="image"
     app
-    color="grey darken-2"
+    color="black"
     dark
     floating
     mobile-break-point="991"
     persistent
-    width="260"
+    width="270"
   >
     <template v-slot:img="attrs">
       <v-img v-bind="attrs" gradient="to top, rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)" />
     </template>
 
     <v-list-item two-line>
-      <v-list-item-avatar color="white">
-        <v-img src="" height="34" contain />
-      </v-list-item-avatar>
-
-      <v-list-item-title class="title">TimeSheet</v-list-item-title>
+      <v-list-item-title class="title" align="center">TimeSheet</v-list-item-title>
     </v-list-item>
 
     <v-divider class="mx-3 mb-3" />
@@ -42,13 +38,20 @@
         <v-list-item-title v-text="link.text" />
       </v-list-item>
     </v-list>
+    <template v-slot:append>
+      <v-list nav>
+        <v-list-item>
+          <v-list-item-title class="font-weight-light">TimeSheet Management - 2019</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </template>
   </v-navigation-drawer>
-</template>
+</template> 
 
 <script>
 // Utilities
 import { mapMutations, mapState } from "vuex";
-import { mdiSignalCellular } from '@mdi/js';
+import { mdiSignalCellular } from "@mdi/js";
 import { mdiCash } from "@mdi/js";
 import { mdiHome } from "@mdi/js";
 
