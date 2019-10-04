@@ -36,12 +36,13 @@
   
 <script>
 import axios from "axios";
+import router from "../router";
 
 export default {
   mounted() {
+    this.checkLoggedIn();
     this.getData();
-
-    axios.get("http://127.0.0.1:8000/projects/").then(response => {
+    axios.get("http://127.0.0.1:8000/projects/user/").then(response => {
       this.projects = response.data;
     });
   },
@@ -50,6 +51,12 @@ export default {
     getData: function() {},
     complete(index) {
       this.list[index] = !this.list[index];
+    },
+    checkLoggedIn: function() {
+      this.$session.start();
+      if (!this.$session.has("token")) {
+        router.push("/auth");
+      }
     }
   },
   created: function() {

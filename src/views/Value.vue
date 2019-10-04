@@ -12,18 +12,25 @@
 
 <script>
 import axios from "axios";
+import router from "../router";
 
 export default {
   mounted() {
+    this.checkLoggedIn();
     this.getData();
-
     axios.get("http://127.0.0.1:8000/values/").then(response => {
       this.values = response.data;
     });
   },
 
   methods: {
-    getData: function() {}
+    getData: function() {},
+    checkLoggedIn: function() {
+      this.$session.start();
+      if (!this.$session.has("token")) {
+        router.push("/auth");
+      }
+    }
   },
   created: function() {
     this.getData();

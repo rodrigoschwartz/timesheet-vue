@@ -17,9 +17,7 @@ import router from "../router";
 export default {
   mounted() {
     this.checkLoggedIn();
-
     this.getData();
-
     axios.get("http://127.0.0.1:8000/hours/").then(response => {
       this.hours = response.data;
     });
