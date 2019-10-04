@@ -12,10 +12,12 @@
 
 <script>
 import axios from "axios";
-import moment from "moment";
+import router from "../router";
 
 export default {
   mounted() {
+    this.checkLoggedIn();
+
     this.getData();
 
     axios.get("http://127.0.0.1:8000/hours/").then(response => {
@@ -24,7 +26,13 @@ export default {
   },
 
   methods: {
-    getData: function() {}
+    getData: function() {},
+    checkLoggedIn: function() {
+      this.$session.start();
+      if (!this.$session.has("token")) {
+        router.push("/auth");
+      }
+    }
   },
   created: function() {
     this.getData();
@@ -39,7 +47,7 @@ export default {
         { sortable: true, text: "Project", value: "project.demandCode" },
         { sortable: true, text: "Description", value: "project.description" },
         { sortable: false, text: "Hours", value: "hours" },
-        { sortable: false, text: "Date", value: "created_at"},
+        { sortable: false, text: "Date", value: "created_at" }
         //  { sortable: false, text: "Action", value: "action" }
       ]
     };

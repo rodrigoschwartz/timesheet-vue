@@ -28,5 +28,10 @@ export default [
     path: '/dashboards',
     name: 'Dashboards',
     view: 'Dashboards'
+  },
+  {
+    path: '/auth',
+    name: 'Auth',
+    view: 'Auth'
   }
 ]
