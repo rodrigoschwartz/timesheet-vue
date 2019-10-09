@@ -3,7 +3,7 @@
     <v-row justify="left">
       <v-col cols="10">
         <material-card color="orange" title="Projects" text>
-          <v-data-table :headers="headers" :items="projects" :search="search" hide-default-footer />
+          <v-data-table :headers="header" :items="projects" :search="search" hide-default-footer />
         </material-card>
       </v-col>
     </v-row>
@@ -40,6 +40,18 @@ import router from "../router";
 
 export default {
   mounted() {
+    axios.interceptors.request.use(
+      config => {
+        let token = this.$session.get("token");
+        if (token) {
+          config.headers["Authorization"] = `Token ${token}`;
+        }
+        return config;
+      },
+      error => {
+        return Promise.reject(error);
+      }
+    );
     this.checkLoggedIn();
     this.getData();
     axios.get("http://127.0.0.1:8000/projects/user/").then(response => {
@@ -67,7 +79,7 @@ export default {
     return {
       search: "",
       projects: [],
-      headers: [
+      header: [
         //  { sortable: true, text: "Id", value: "id" },
         { sortable: true, text: "Demand Code", value: "demandCode" },
         { sortable: false, text: "Description", value: "description" },
