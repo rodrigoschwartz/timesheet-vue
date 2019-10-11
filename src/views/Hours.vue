@@ -16,6 +16,13 @@ import router from "../router";
 
 export default {
   mounted() {
+    axios.interceptors.request.use(config => {
+      let token = this.$session.get("token");
+      if (token) {
+        config.headers["Authorization"] = `Token ${token}`;
+      }
+      return config;
+    });
     this.checkLoggedIn();
     this.getData();
     axios.get("http://127.0.0.1:8000/hours/").then(response => {
@@ -45,8 +52,8 @@ export default {
         { sortable: true, text: "Project", value: "project.demandCode" },
         { sortable: true, text: "Description", value: "project.description" },
         { sortable: false, text: "Hours", value: "hours" },
-        { sortable: false, text: "Date", value: "created_at" }
-        //  { sortable: false, text: "Action", value: "action" }
+        { sortable: false, text: "Date", value: "created_at" },
+        { sortable: false, text: "Responsible", value: "user.username" }
       ]
     };
   }

@@ -40,21 +40,16 @@ import router from "../router";
 
 export default {
   mounted() {
-    axios.interceptors.request.use(
-      config => {
-        let token = this.$session.get("token");
-        if (token) {
-          config.headers["Authorization"] = `Token ${token}`;
-        }
-        return config;
-      },
-      error => {
-        return Promise.reject(error);
+    axios.interceptors.request.use(config => {
+      let token = this.$session.get("token");
+      if (token) {
+        config.headers["Authorization"] = `Token ${token}`;
       }
-    );
+      return config;
+    });
     this.checkLoggedIn();
     this.getData();
-    axios.get("http://127.0.0.1:8000/projects/user/").then(response => {
+    axios.get("http://127.0.0.1:8000/projects/").then(response => {
       this.projects = response.data;
     });
   },
@@ -85,8 +80,8 @@ export default {
         { sortable: false, text: "Description", value: "description" },
         { sortable: false, text: "Status", value: "status" },
         { sortable: false, text: "Value", value: "value", align: "right" },
-        { sortable: false, text: "Hours", value: "hoursAp", align: "right" }
-        //  { sortable: false, text: "Action", value: "action" }
+        { sortable: false, text: "Hours", value: "hoursAp", align: "right" },
+        { sortable: false, text: "Responsible", value: "user.username" }
       ],
 
       projects_charts: {
