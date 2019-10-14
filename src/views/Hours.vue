@@ -2,8 +2,29 @@
   <v-container fluid>
     <v-row justify="left">
       <v-col cols="10">
+        <material-card color="green" title="Add Hours" text="Add new Hours appoitment">
+          <v-form>
+            <v-container class="py-0">
+              <v-row>
+                <v-col cols="15" md="4">
+                  <v-text-field label="Hours" />
+                </v-col>
+
+                <v-col cols="15" md="4">
+                  <v-text-field class="purple-input" label="User Name" />
+                </v-col>
+
+                <v-col cols="5" md="4" align="right">
+                  <v-btn color="success">Create</v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-form>
+        </material-card>
+      </v-col>
+      <v-col cols="10">
         <material-card color="orange" title="Hours" text>
-          <v-data-table :headers="headers" :items="hours" :search="search" hide-default-footer/>
+          <v-data-table :headers="headers" :items="hours" :search="search" hide-default-footer />
         </material-card>
       </v-col>
     </v-row>
