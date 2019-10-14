@@ -3,7 +3,7 @@
     <v-row justify="left">
       <v-col cols="10">
         <material-card color="orange" title="Hours" text>
-          <v-data-table :headers="headers" :items="hours" :search="search" hide-default-footer />
+          <v-data-table :headers="headers" :items="hours" :search="search" hide-default-footer/>
         </material-card>
       </v-col>
     </v-row>
@@ -16,27 +16,31 @@ import router from "../router";
 
 export default {
   mounted() {
-    axios.interceptors.request.use(config => {
-      let token = this.$session.get("token");
-      if (token) {
-        config.headers["Authorization"] = `Token ${token}`;
-      }
-      return config;
-    });
     this.checkLoggedIn();
+    this.checkAuth();
     this.getData();
-    axios.get("http://127.0.0.1:8000/hours/").then(response => {
-      this.hours = response.data;
-    });
   },
 
   methods: {
-    getData: function() {},
+    getData: function() {
+      axios.get("http://127.0.0.1:8000/hours/").then(response => {
+        this.hours = response.data;
+      });
+    },
     checkLoggedIn: function() {
       this.$session.start();
       if (!this.$session.has("token")) {
         router.push("/auth");
       }
+    },
+    checkAuth: function() {
+      axios.interceptors.request.use(config => {
+        let token = this.$session.get("token");
+        if (token) {
+          config.headers["Authorization"] = `Token ${token}`;
+        }
+        return config;
+      });
     }
   },
   created: function() {

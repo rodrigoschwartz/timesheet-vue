@@ -26,22 +26,6 @@
         align="center"
         class="mx-0"
       >
-        <v-text-field
-          class="mr-4 purple-input"
-          color="purple"
-          label="Search..."
-          hide-details
-        />
-
-        <v-btn
-          icon
-          to="/"
-        >
-          <v-icon color="tertiary">
-            mdi-view-dashboard
-          </v-icon>
-        </v-btn>
-
         <v-menu
           bottom
           left

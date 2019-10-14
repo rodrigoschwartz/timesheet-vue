@@ -40,22 +40,17 @@ import router from "../router";
 
 export default {
   mounted() {
-    axios.interceptors.request.use(config => {
-      let token = this.$session.get("token");
-      if (token) {
-        config.headers["Authorization"] = `Token ${token}`;
-      }
-      return config;
-    });
     this.checkLoggedIn();
+    this.checkAuth();
     this.getData();
-    axios.get("http://127.0.0.1:8000/projects/").then(response => {
-      this.projects = response.data;
-    });
   },
 
   methods: {
-    getData: function() {},
+    getData: function() {
+      axios.get("http://127.0.0.1:8000/projects/user/").then(response => {
+      this.projects = response.data;
+    });
+    },
     complete(index) {
       this.list[index] = !this.list[index];
     },
@@ -64,6 +59,15 @@ export default {
       if (!this.$session.has("token")) {
         router.push("/auth");
       }
+    },
+     checkAuth: function() {
+      axios.interceptors.request.use(config => {
+        let token = this.$session.get("token");
+        if (token) {
+          config.headers["Authorization"] = `Token ${token}`;
+        }
+        return config;
+      });
     }
   },
   created: function() {
