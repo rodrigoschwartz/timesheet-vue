@@ -4,7 +4,7 @@
       <v-flex xs12 sm8 lg4 md5>
         <v-card class="login-card">
           <v-card-title>
-            <span class="headline">Login</span>
+            <span class="headline">Autenticação</span>
           </v-card-title>
 
           <v-spacer />
@@ -19,7 +19,7 @@
                 <v-text-field
                   v-model="credentials.username"
                   :counter="70"
-                  label="username"
+                  label="Login"
                   :rules="rules.username"
                   maxlength="70"
                   required
@@ -29,13 +29,13 @@
                   type="password"
                   v-model="credentials.password"
                   :counter="20"
-                  label="password"
+                  label="Senha"
                   :rules="rules.password"
                   maxlength="20"
                   required
                 />
               </v-container>
-              <v-btn class="pink white--text" :disabled="!valid" @click="login">Login</v-btn>
+              <v-btn class="orange white--text" :disabled="!valid" @click="login">Acessar</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -56,18 +56,18 @@ export default {
     loading: false,
     rules: {
       username: [
-        v => !!v || "Username is required",
+        v => !!v || "Obrigatório",
         v =>
           (v && v.length > 3) ||
-          "A username must be more than 3 characters long",
+          "o login deve ter mais de 3 caracteres",
         v =>
           /^[a-z0-9_]+$/.test(v) ||
-          "A username can only contain letters and digits"
+          "O login deve conter letras e números"
       ],
       password: [
-        v => !!v || "Password is required",
+        v => !!v || "Obrigatório",
         v =>
-          (v && v.length > 4) || "The password must be longer than 4 characters"
+          (v && v.length > 4) || "A senha deve conter mais de 4 caracteres"
       ]
     }
   }),

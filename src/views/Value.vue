@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row justify="left">
       <v-col cols="10">
-        <material-card color="orange" title="Value" text>
+        <material-card color="green" title="Gastos" text>
           <v-data-table :headers="headers" :items="values" :search="search" hide-default-footer />
         </material-card>
       </v-col>
@@ -53,13 +53,14 @@ export default {
       values: [],
       headers: [
         //  { sortable: true, text: "Id", value: "id" },
-        { sortable: true, text: "Project", value: "project.demandCode" },
-        { sortable: true, text: "Description", value: "project.description" },
-        { sortable: false, text: "Value", value: "value" },
-        { sortable: false, text: "Date", value: "created_at" },
-        { sortable: false, text: "Responsible", value: "user.username" }
+        { sortable: true, text: "Projeto", value: "project.demandCode" },
+        { sortable: true, text: "Descrição", value: "project.description" },
+        { sortable: false, text: "Gastos", value: "value" },
+        { sortable: false, text: "Data", value: "created_at" },
+        { sortable: false, text: "Responsável", value: "user.username" }
       ]
     };
   }
 };
 </script>
+

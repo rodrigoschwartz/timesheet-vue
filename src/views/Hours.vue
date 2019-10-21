@@ -2,28 +2,7 @@
   <v-container fluid>
     <v-row justify="left">
       <v-col cols="10">
-        <material-card color="green" title="Add Hours" text="Add new Hours appoitment">
-          <v-form>
-            <v-container class="py-0">
-              <v-row>
-                <v-col cols="15" md="4">
-                  <v-text-field label="Hours" />
-                </v-col>
-
-                <v-col cols="15" md="4">
-                  <v-text-field class="purple-input" label="User Name" />
-                </v-col>
-
-                <v-col cols="5" md="4" align="right">
-                  <v-btn color="success">Create</v-btn>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-form>
-        </material-card>
-      </v-col>
-      <v-col cols="10">
-        <material-card color="orange" title="Hours" text>
+        <material-card color="blue" title="Horas" text>
           <v-data-table :headers="headers" :items="hours" :search="search" hide-default-footer />
         </material-card>
       </v-col>
@@ -74,11 +53,11 @@ export default {
       hours: [],
       headers: [
         //  { sortable: true, text: "Id", value: "id" },
-        { sortable: true, text: "Project", value: "project.demandCode" },
-        { sortable: true, text: "Description", value: "project.description" },
-        { sortable: false, text: "Hours", value: "hours" },
-        { sortable: false, text: "Date", value: "created_at" },
-        { sortable: false, text: "Responsible", value: "user.username" }
+        { sortable: true, text: "Projetos", value: "project.demandCode" },
+        { sortable: true, text: "Descrição", value: "project.description" },
+        { sortable: false, text: "Horas", value: "hours" },
+        { sortable: false, text: "Data", value: "created_at" },
+        { sortable: false, text: "Responsável", value: "user.username" }
       ]
     };
   }

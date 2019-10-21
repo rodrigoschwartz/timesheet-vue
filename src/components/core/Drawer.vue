@@ -83,11 +83,6 @@ export default {
         to: "/value",
         icon: "mdi-cash",
         text: "Value Appointment"
-      },
-      {
-        to: "/dashboards",
-        icon: "mdi-signal",
-        text: "Dashboards"
       }
     ]
   }),
