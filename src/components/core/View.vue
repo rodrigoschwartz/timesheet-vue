@@ -5,10 +5,9 @@
         <router-view />
       </v-fade-transition>
     </div>
-    
+
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        
         <v-speed-dial
           absolute="righxt"
           v-model="fab"
@@ -24,9 +23,14 @@
             </v-btn>
           </template>
 
-          <v-btn fab dark small color="blue" v-on="on">
-            <v-icon>mdi-alarm-check</v-icon>
-          </v-btn>
+          <v-tooltip left>
+            <template v-slot:activator="{ on }">
+              <v-btn fab dark small color="blue" v-on="on">
+                <v-icon>mdi-alarm-check</v-icon>
+              </v-btn>
+            </template>
+            <span>Novo Apont. Horas</span>
+          </v-tooltip>
 
           <v-btn fab dark small color="green">
             <v-icon>mdi-cash</v-icon>
@@ -35,10 +39,9 @@
           <v-btn fab dark small color="orange">
             <v-icon>mdi-axe</v-icon>
           </v-btn>
-
         </v-speed-dial>
       </template>
-      
+
       <v-card>
         <v-card-title>
           <span class="headline">User Profile</span>
@@ -67,11 +70,7 @@
                 <v-text-field label="Password*" type="password" required></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age*"
-                  required
-                ></v-select>
+                <v-select :items="['0-17', '18-29', '30-54', '54+']" label="Age*" required></v-select>
               </v-col>
               <v-col cols="12" sm="6">
                 <v-autocomplete
@@ -91,15 +90,14 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  
   </v-content>
 </template>
 
 <script>
 export default {
   data: () => ({
-      dialog: false,
-    }),
+    dialog: false
+  }),
   name: "CoreView"
 };
 </script>
