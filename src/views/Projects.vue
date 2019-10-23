@@ -133,7 +133,7 @@ export default {
       console.log(this.project_delete);
       axios
         .delete("http://127.0.0.1:8000/projects/delete/", {
-          project: this.project_delete
+          id:'5'
         })
         .then(response => {
           alert("Eliminado com sucesso!");
@@ -145,7 +145,7 @@ export default {
           alert("Erro ao Eliminar!");
         });
 
-      this.dialog = false;
+      this.delete_dialog = false;
     },
     updateData() {
       axios
