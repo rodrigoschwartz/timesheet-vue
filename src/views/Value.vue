@@ -51,7 +51,7 @@ export default {
 
   methods: {
     getData: function() {
-      axios.get("http://127.0.0.1:8000/values/user/").then(response => {
+      axios.get("http://127.0.0.1:8000/values/").then(response => {
         this.values = response.data;
       });
     },

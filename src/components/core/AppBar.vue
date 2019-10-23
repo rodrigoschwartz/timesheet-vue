@@ -11,8 +11,8 @@
 
     <v-toolbar-items>
       <v-row align="center" class="mx-0">
-        <v-btn to="/home" @click="logout()">
-          <v-icon color="tertiary">mdi-account</v-icon>
+        <v-btn rounded to="/auth" @click="logout()">
+          Logout
         </v-btn>
       </v-row>
     </v-toolbar-items>
