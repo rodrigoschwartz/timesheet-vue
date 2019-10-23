@@ -72,17 +72,17 @@ export default {
       {
         to: "/projects",
         icon: "mdi-axe",
-        text: "Projects"
+        text: "Projetos"
       },
       {
         to: "/hours",
         icon: "mdi-alarm-check",
-        text: "Hours Appointment"
+        text: "Apontamento de Horas"
       },
       {
         to: "/value",
         icon: "mdi-cash",
-        text: "Value Appointment"
+        text: "Apontamento de Gastos"
       }
     ]
   }),

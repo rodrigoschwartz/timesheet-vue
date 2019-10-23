@@ -7,9 +7,11 @@
         </material-card>
       </v-col>
     </v-row>
-        <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn color="green" fab v-on="on"><v-icon>mdi-plus</v-icon></v-btn>
+        <v-btn color="green" fab v-on="on">
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -19,10 +21,10 @@
           <v-container>
             <v-row>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field label="Gastos *" required></v-text-field>
+                <v-text-field v-model="value" label="Gastos *" required></v-text-field>
               </v-col>
               <v-col cols="12" sm="6">
-                <v-autocomplete :items="this.projects" label="Projeto*"></v-autocomplete>
+                <v-select v-model="project" :items="this.projects" label="Projeto *"></v-select>
               </v-col>
             </v-row>
           </v-container>
@@ -31,7 +33,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="red darken-1" text @click="dialog = false">Close</v-btn>
-          <v-btn color="green darken-1" text @click="dialog = false">Save</v-btn>
+          <v-btn color="green darken-1" text @click="saveData">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -50,9 +52,30 @@ export default {
   },
 
   methods: {
+    saveData() {
+      axios
+        .post("http://127.0.0.1:8000/values/create/", {
+          value: this.value,
+          project: this.project
+        })
+        .then(response => {
+          alert("Inserido com sucesso!")
+          this.dialog = false
+          this.getData();
+        })
+        .catch(e => {
+          console.error(e);
+          alert("Erro ao Inserir!")
+        });
+    },
     getData: function() {
       axios.get("http://127.0.0.1:8000/values/").then(response => {
         this.values = response.data;
+      });
+      axios.get("http://127.0.0.1:8000/projects/").then(response => {
+        this.projects = response.data.map(item => {
+          return { value: item.id, text: item.demandCode };
+        });
       });
     },
     checkLoggedIn: function() {
@@ -79,6 +102,8 @@ export default {
     return {
       dialog: false,
       search: "",
+      value: 0,
+      project: 0,
       values: [],
       headers: [
         //  { sortable: true, text: "Id", value: "id" },
