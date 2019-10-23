@@ -57,17 +57,11 @@ export default {
     rules: {
       username: [
         v => !!v || "Obrigatório",
-        v =>
-          (v && v.length > 3) ||
-          "o login deve ter mais de 3 caracteres",
-        v =>
-          /^[a-z0-9_]+$/.test(v) ||
-          "O login deve conter letras e números"
+        v => (v && v.length > 3) || "o login deve ter mais de 3 caracteres"
       ],
       password: [
         v => !!v || "Obrigatório",
-        v =>
-          (v && v.length > 4) || "A senha deve conter mais de 4 caracteres"
+        v => (v && v.length > 4) || "A senha deve conter mais de 4 caracteres"
       ]
     }
   }),
@@ -81,6 +75,10 @@ export default {
             this.$session.start();
             this.$session.set("token", res.data.token);
             router.push("/");
+          })
+          .catch(() => {
+            this.loading = false;
+            alert("Login incorreto!");
           });
       }
     }
