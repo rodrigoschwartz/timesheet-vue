@@ -11,7 +11,7 @@
       <v-col cols="1">
         <v-dialog v-model="dialog" persistent max-width="600px">
           <template v-slot:activator="{ on }">
-            <v-btn color="orange" v-on="on">
+            <v-btn fab color="orange" v-on="on">
               <v-icon>mdi-plus</v-icon>
             </v-btn>
           </template>
@@ -55,7 +55,7 @@
       <v-col cols="1">
         <v-dialog v-model="edit_dialog" persistent max-width="600px">
           <template v-slot:activator="{ on }">
-            <v-btn color="orange" v-on="on">
+            <v-btn fab color="orange" v-on="on">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </template>
@@ -87,7 +87,7 @@
       <v-col cols="1">
         <v-dialog v-model="delete_dialog" persistent max-width="600px">
           <template v-slot:activator="{ on }">
-            <v-btn color="orange" v-on="on">
+            <v-btn fab color="orange" v-on="on">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </template>
@@ -133,11 +133,10 @@ export default {
       console.log(this.project_delete);
       axios
         .delete("http://127.0.0.1:8000/projects/delete/", {
-          id:'5'
+          data: { id: this.project_delete }
         })
         .then(response => {
           alert("Eliminado com sucesso!");
-          console.log(response);
           this.getData();
         })
         .catch(e => {
@@ -149,8 +148,7 @@ export default {
     },
     updateData() {
       axios
-        .put("http://127.0.0.1:8000/projects/update/", {
-          project: this.project_update,
+        .put("http://127.0.0.1:8000/projects/" + this.project_update, {
           status: this.status_update
         })
         .then(response => {
