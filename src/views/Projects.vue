@@ -53,7 +53,7 @@
         </v-dialog>
       </v-col>
       <v-col cols="1">
-        <v-dialog v-model="edit_dialog" persistent max-width="600px">
+        <v-dialog v-model="update_dialog" persistent max-width="600px">
           <template v-slot:activator="{ on }">
             <v-btn fab color="orange" v-on="on">
               <v-icon>mdi-pencil</v-icon>
@@ -78,7 +78,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="red darken-1" text @click="edit_dialog = false">Close</v-btn>
+              <v-btn color="red darken-1" text @click="update_dialog = false">Close</v-btn>
               <v-btn color="orange darken-1" text @click="updateData">Update</v-btn>
             </v-card-actions>
           </v-card>
@@ -148,19 +148,18 @@ export default {
     },
     updateData() {
       axios
-        .put("http://127.0.0.1:8000/projects/" + this.project_update, {
+        .put("http://127.0.0.1:8000/projects/" + this.project_update + "/", {
           status: this.status_update
         })
         .then(response => {
           alert("Atualizado com sucesso!");
-          console.log(response);
           this.getData();
         })
         .catch(e => {
           console.error(e);
           alert("Erro ao atualizar!");
         });
-      this.dialog = false;
+      this.update_dialog = false;
     },
     saveData() {
       axios
@@ -229,7 +228,7 @@ export default {
   data() {
     return {
       delete_dialog: false,
-      edit_dialog: false,
+      update_dialog: false,
       dialog: false,
       search: "",
       user_create: 0,
@@ -246,18 +245,41 @@ export default {
       projects: [],
       projetos: [],
       status: [
-        { value: 1, text: "Planning" },
-        { value: 2, text: "Execution" },
-        { value: 3, text: "Tests" },
+        { value: 1, text: "Planejamento" },
+        { value: 2, text: "Execução" },
+        { value: 3, text: "Testes" },
         { value: 4, text: "Go Live" },
-        { value: 5, text: "Finished" }
+        { value: 5, text: "Concluído" }
       ],
       header: [
+        { sortable: true, text: "Id", value: "id" },
         { sortable: true, text: "Código", value: "demandCode" },
         { sortable: false, text: "Descrição", value: "description" },
         { sortable: false, text: "Status", value: "status" },
-        { sortable: false, text: "Gastos", value: "value", align: "right" },
-        { sortable: false, text: "Horas", value: "hoursAp", align: "right" },
+        {
+          sortable: false,
+          text: "Gastos Totais",
+          value: "value",
+          align: "right"
+        },
+        {
+          sortable: false,
+          text: "Gastos Apont.",
+          value: "value",
+          align: "right"
+        },
+        {
+          sortable: false,
+          text: "Horas Totais",
+          value: "hoursAp",
+          align: "right"
+        },
+        {
+          sortable: false,
+          text: "Horas Apont.",
+          value: "hoursAp",
+          align: "right"
+        },
         { sortable: false, text: "Responsável", value: "user.username" }
       ]
     };

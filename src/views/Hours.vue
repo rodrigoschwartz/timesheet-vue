@@ -151,13 +151,10 @@ export default {
       });
     }
   },
-  created: function() {
-    this.getData();
-  },
-
   data() {
     return {
       dialog: false,
+      delete_dialog: false,
       projects: [],
       search: "",
       hour: 0,

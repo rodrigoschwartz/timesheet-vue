@@ -148,10 +148,6 @@ export default {
       });
     }
   },
-  created: function() {
-    this.getData();
-  },
-
   data() {
     return {
       dialog: false,
@@ -159,6 +155,7 @@ export default {
       search: "",
       value: 0,
       project: 0,
+      projects: [],
       value_delete: 0,
       values: [],
       valores: [],
