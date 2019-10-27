@@ -91,8 +91,8 @@ export default {
           data: { id: this.hours_delete }
         })
         .then(response => {
-          alert("Eliminado com sucesso!");
           this.getData();
+          alert("Eliminado com sucesso!");
         })
         .catch(e => {
           console.error(e);
@@ -108,8 +108,8 @@ export default {
           project: this.project
         })
         .then(response => {
-          alert("Inserido com sucesso!");
           this.getData();
+          alert("Inserido com sucesso!");
         })
         .catch(e => {
           console.error(e);

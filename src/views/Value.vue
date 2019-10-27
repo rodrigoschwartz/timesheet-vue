@@ -22,10 +22,13 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="6" md="3">
                     <v-text-field v-model="value" label="Gastos *" required></v-text-field>
                   </v-col>
-                  <v-col cols="12" sm="6">
+                  <v-col cols="12" sm="6" md="5">
+                    <v-select v-model="categ" :items="this.categorias" label="Categoria *"></v-select>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
                     <v-select v-model="project" :items="this.projects" label="Projeto *"></v-select>
                   </v-col>
                 </v-row>
@@ -91,8 +94,8 @@ export default {
           data: { id: this.value_delete }
         })
         .then(response => {
-          alert("Eliminado com sucesso!");
           this.getData();
+          alert("Eliminado com sucesso!");
         })
         .catch(e => {
           console.error(e);
@@ -105,17 +108,19 @@ export default {
       axios
         .post("http://127.0.0.1:8000/values/create/", {
           value: this.value,
+          type: this.categ,
           project: this.project
         })
         .then(response => {
-          alert("Inserido com sucesso!");
-          this.dialog = false;
           this.getData();
+          alert("Inserido com sucesso!");
         })
         .catch(e => {
           console.error(e);
           alert("Erro ao Inserir!");
         });
+
+      this.dialog = false;
     },
     getData: function() {
       axios.get("http://127.0.0.1:8000/values/").then(response => {
@@ -156,7 +161,14 @@ export default {
       value: 0,
       project: 0,
       projects: [],
+      categ: 0,
       value_delete: 0,
+      categorias: [
+        { value: 1, text: "Alimentação" },
+        { value: 2, text: "Estadia" },
+        { value: 3, text: "Transporte" },
+        { value: 4, text: "Outros" }
+      ],
       values: [],
       valores: [],
       headers: [
@@ -164,6 +176,7 @@ export default {
         { sortable: true, text: "Projeto", value: "project.demandCode" },
         { sortable: true, text: "Descrição", value: "project.description" },
         { sortable: false, text: "Gastos", value: "value" },
+        { sortable: false, text: "Categoria", value: "type" },
         { sortable: false, text: "Data", value: "created_at" },
         { sortable: false, text: "Responsável", value: "user.username" }
       ]

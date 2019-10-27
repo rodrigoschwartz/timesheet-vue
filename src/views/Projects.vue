@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row justify="center">
-      <v-col cols="10">
+      <v-col cols="12">
         <material-card color="orange" title="Projetos" text>
           <v-data-table :headers="header" :items="projects" :search="search" hide-default-footer />
         </material-card>
@@ -152,8 +152,8 @@ export default {
           status: this.status_update
         })
         .then(response => {
-          alert("Atualizado com sucesso!");
           this.getData();
+          alert("Atualizado com sucesso!");
         })
         .catch(e => {
           console.error(e);
@@ -172,8 +172,8 @@ export default {
           status: this.status_create
         })
         .then(response => {
-          alert("Inserido com sucesso!");
           this.getData();
+          alert("Inserido com sucesso!");
         })
         .catch(e => {
           console.error(e);
@@ -252,7 +252,7 @@ export default {
         { value: 5, text: "Concluído" }
       ],
       header: [
-        { sortable: true, text: "Id", value: "id" },
+        //{ sortable: true, text: "Id", value: "id" },
         { sortable: true, text: "Código", value: "demandCode" },
         { sortable: false, text: "Descrição", value: "description" },
         { sortable: false, text: "Status", value: "status" },
@@ -265,7 +265,7 @@ export default {
         {
           sortable: false,
           text: "Gastos Apont.",
-          value: "value",
+          value: "valuesApont.value__sum",
           align: "right"
         },
         {
@@ -277,7 +277,7 @@ export default {
         {
           sortable: false,
           text: "Horas Apont.",
-          value: "hoursAp",
+          value: "hoursApont.hours__sum",
           align: "right"
         },
         { sortable: false, text: "Responsável", value: "user.username" }
